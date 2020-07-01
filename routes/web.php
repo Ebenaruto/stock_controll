@@ -27,3 +27,7 @@ Auth::routes();
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', 'usersController', ['except' => []]);
 });
+
+Route::get('/sell-product', function () {
+    return view('caissier_vendre_produits');
+});
