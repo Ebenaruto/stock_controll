@@ -24,6 +24,6 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Auth::routes();
 
-Route::namespace('Admin')->prefix('admin')->name('admin.')->group(function () {
+Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', 'usersController', ['except' => []]);
 });

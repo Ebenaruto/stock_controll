@@ -12,7 +12,7 @@
 
     <!-- Scripts -->
     <script src="<?php echo e(asset('js/app.js')); ?>" defer></script>
-    <script src="assets/js/bootstrap.js"></script>
+    <script src="../assets/js/bootstrap.js"></script>
 
 
     <!-- Fonts -->
@@ -21,7 +21,7 @@
 
     <!-- Styles -->
     <link href="<?php echo e(asset('css/app.css')); ?>" rel="stylesheet">
-    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
 </head>
 
@@ -53,9 +53,7 @@
                             <a class="nav-link" href="<?php echo e(route('login')); ?>"><?php echo e(__('Login')); ?></a>
                         </li>
                         <?php if(Route::has('register')): ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<?php echo e(route('register')); ?>"><?php echo e(__('Register')); ?></a>
-                        </li>
+                        
                         <?php endif; ?>
                         <?php else: ?>
                         <li class="nav-item dropdown">
@@ -70,11 +68,11 @@
                                     <?php echo e(__('Logout')); ?>
 
                                 </a>
-
+                                <?php if (app(\Illuminate\Contracts\Auth\Access\Gate::class)->check('manage-users')): ?>
                                 <a class="dropdown-item" href="<?php echo e(route('admin.users.index')); ?>">
                                     Gestion de stock
                                 </a>
-
+                                <?php endif; ?>
                                 <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST"
                                     style="display: none;">
                                     <?php echo csrf_field(); ?>

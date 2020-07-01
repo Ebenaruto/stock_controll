@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
+use App\Role;
 use App\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Access\Gate as AccessGate;
 
 class userscontroller extends Controller
 {
@@ -31,7 +35,11 @@ class userscontroller extends Controller
      */
     public function create()
     {
-        //
+
+        if (Gate::denies('create-users')) {
+            return redirect(route('admin.users.index'));
+        }
+        return view('admin.users.create');
     }
 
 
@@ -43,7 +51,15 @@ class userscontroller extends Controller
      */
     public function store(Request $request)
     {
-        //
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            $aa = 'password' => $request->password,
+            $aa => hash::make($aa)
+        ]);
+
+        $users = User::all();
+        return view('Admin/users/index')->with('users', $users);
     }
 
     /**
@@ -65,7 +81,16 @@ class userscontroller extends Controller
      */
     public function edit(User $user)
     {
-        //
+
+        if (Gate::denies('edit-users')) {
+            return redirect(route('admin.users.index'));
+        }
+
+        $roles = Role::all();
+        return view('admin.users.edit')->with([
+            'user' => $user,
+            'roles' => $roles
+        ]);
     }
 
     /**
@@ -77,7 +102,8 @@ class userscontroller extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $user->roles()->sync($request->roles);
+        return redirect()->route('admin.users.index');
     }
 
     /**
@@ -88,6 +114,13 @@ class userscontroller extends Controller
      */
     public function destroy(User $user)
     {
-        //
+
+        if (Gate::denies('delete-users')) {
+            return redirect(route('admin.users.index'));
+        }
+
+        $user->roles()->detach();
+        $user->delete();
+        return redirect()->route('admin.users.index');
     }
 }
