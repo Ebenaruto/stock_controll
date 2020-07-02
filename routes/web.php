@@ -28,6 +28,4 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'usersController', ['except' => []]);
 });
 
-Route::get('/sell-product', function () {
-    return view('caissier_vendre_produits');
-});
+Route::get('/sell-product', 'caissierController@sellProduct');
