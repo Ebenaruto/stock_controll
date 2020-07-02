@@ -14,8 +14,10 @@
                         @foreach ($roles as $role)
 
                         <div class="form-check">
-                            <input type="checkbox" name="roles[]" value="{{$role->id}}">
-                            <label>{{$role->name}}</label>
+                            <label>{{$role->name}}
+                                <input type="radio" class="with-gap" checked name="roles[]" value="{{$role->id}}" />
+                                <span></span>
+                            </label>
                         </div>
 
                         @endforeach

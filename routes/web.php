@@ -18,6 +18,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/AccueilAdmin', function () {
+    return view('AccueilAdmin');
+});
+
+
+Route::get('/Formulaire', 'ProduitController@create');
+
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -28,9 +36,7 @@ Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:mana
     Route::resource('/users', 'usersController', ['except' => []]);
 });
 
-// Produits 
-Route::get('produits','ProduitsController@produit');
-Route::get('produits/create','ProduitsController@create');
-Route::post('produits','ProduitsController@store');
-Route::get('produits/{produit}','ProduitsController@show');
-Route::get('produits/{produit}/modifier','ProduitsController@modifier');
+Route::post('ajouter', 'ProduitController@strore');
+
+
+Route::get('ListeAdmin', 'ProduitController@index');
