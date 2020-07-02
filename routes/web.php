@@ -27,3 +27,10 @@ Auth::routes();
 Route::namespace('Admin')->prefix('admin')->name('admin.')->middleware('can:manage-users')->group(function () {
     Route::resource('/users', 'usersController', ['except' => []]);
 });
+
+// Produits 
+Route::get('produits','ProduitsController@produit');
+Route::get('produits/create','ProduitsController@create');
+Route::post('produits','ProduitsController@store');
+Route::get('produits/{produit}','ProduitsController@show');
+Route::get('produits/{produit}/modifier','ProduitsController@modifier');
