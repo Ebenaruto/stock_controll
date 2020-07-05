@@ -19,8 +19,8 @@
       <td >{{$produit->Prix_Unitaire}}</td>
       <td class="bg-info">{{$produit->Categorie}}</td>
       <td>{{$produit->stock}}</td>
-      <td><a href="/produits/{{$produit->id_produit}}/modifier" class="btn btn-secondary">Modifier</a></td>
-      <td><button class="btn btn-danger">ajouter le client</button></td>
+      <td><a href="/produits/{{$produit->id}}/modifier" class="btn btn-secondary">Modifier</a></td>
+      <td><a href="" class="btn btn-danger">Supprimer un produit </button></td>
     </tr>
     @endforeach
   </tbody>

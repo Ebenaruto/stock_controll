@@ -34,3 +34,5 @@ Route::get('produits/create','ProduitsController@create');
 Route::post('produits','ProduitsController@store');
 Route::get('produits/{produit}','ProduitsController@show');
 Route::get('produits/{produit}/modifier','ProduitsController@modifier');
+Route::patch('produits/{produit}','ProduitsController@update');
+Route::delete('produits/{produit}','ProduitsController@destroy');
